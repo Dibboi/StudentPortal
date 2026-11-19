@@ -1,0 +1,539 @@
+]<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | UiTM Student Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Custom styles */
+    .profile-card { background: linear-gradient(135deg, #4b1d6f 0%, #35104f 100%); color: white; }
+    .profile-pic { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #f2b705; object-fit: cover; background-color: #fff;}
+    
+    /* Quick link hover effect */
+    .quick-link-btn { transition: 0.2s; border-left: 4px solid transparent; cursor: pointer; }
+    .quick-link-btn:hover { background-color: #f8f9fa; border-left-color: #4b1d6f; transform: translateX(5px); }
+    
+    /* Marquee/Ticker Fix */
+    .ticker-wrapper { 
+      overflow: hidden; 
+      white-space: nowrap; 
+      width: 100%; 
+      background-color: #ffc107; 
+      padding: 10px 0;
+      border-bottom: 2px solid #e0a800;
+    }
+    .ticker-text { 
+      display: inline-block; 
+      padding-left: 100%; 
+      animation: ticker 20s linear infinite; 
+      font-weight: 600; 
+      color: #333;
+      font-size: 0.95rem;
+    }
+    .ticker-text:hover { animation-play-state: paused; cursor: default; }
+    @keyframes ticker { 
+      0% { transform: translate3d(0, 0, 0); } 
+      100% { transform: translate3d(-100%, 0, 0); } 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-uitm sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="dashboard.html">
+        <span class="brand-badge">UiTM</span> Student Portal
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="results.html">Results</a></li>
+          <li class="nav-item">
+            <a class="nav-link text-warning fw-bold" href="#" id="logoutBtn">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FIXED ALERT BANNER (Ticker) -->
+  <div class="ticker-wrapper">
+    <div class="ticker-text">
+      📢 IMPORTANT ANNOUNCEMENT: Course registration for Semester Oct 2026 - Feb 2027 opens on 15 August 2026. Please clear any outstanding fees to avoid exam barring. 📢
+    </div>
+  </div>
+
+  <main class="container my-4">
+    <div class="row g-4">
+      
+      <!-- LEFT SIDEBAR: PROFILE & QUICK LINKS -->
+      <div class="col-lg-4 col-xl-3">
+        
+        <!-- Profile Card -->
+        <div class="card border-0 shadow-sm mb-4 profile-card">
+          <div class="card-body text-center p-4">
+            <img src="https://ui-avatars.com/api/?name=Student+Adib&background=f2b705&color=35104f&size=128" alt="Profile" class="profile-pic mb-3 shadow">
+            <h5 class="fw-bold mb-1">Adib</h5>
+            <p class="small mb-2 text-white-50">2023123456</p>
+            <span class="badge bg-light text-dark border border-warning">Bachelor of IT (Hons)</span>
+            <hr class="border-light opacity-25">
+            <div class="text-start small">
+              <p class="mb-1"><strong>Faculty:</strong> FSKM</p>
+              <p class="mb-1"><strong>Semester:</strong> 5</p>
+              <p class="mb-0"><strong>Status:</strong> <span class="text-success fw-bold">Active</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links (With Updated Modals) -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white fw-bold py-3">
+             Quick Actions
+          </div>
+          <div class="list-group list-group-flush">
+            <button type="button" class="list-group-item list-group-item-action quick-link-btn py-3 text-start border-0" data-bs-toggle="modal" data-bs-target="#emailModal">
+              <i class="bi bi-envelope me-2 text-primary"></i> Student Email
+            </button>
+            <button type="button" class="list-group-item list-group-item-action quick-link-btn py-3 text-start border-0" data-bs-toggle="modal" data-bs-target="#libraryModal">
+              <i class="bi bi-book me-2 text-success"></i> Library Portal
+            </button>
+            <button type="button" class="list-group-item list-group-item-action quick-link-btn py-3 text-start border-0" data-bs-toggle="modal" data-bs-target="#payFeesModal">
+              <i class="bi bi-cash-coin me-2 text-warning"></i> Pay Fees
+            </button>
+            <button type="button" class="list-group-item list-group-item-action quick-link-btn py-3 text-start border-0" data-bs-toggle="modal" data-bs-target="#examSlipModal">
+              <i class="bi bi-file-earmark-text me-2 text-danger"></i> Exam Slip
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT MAIN CONTENT -->
+      <div class="col-lg-8 col-xl-9">
+        
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <div>
+            <h3 class="fw-bold mb-0">Welcome back 👋</h3>
+            <p class="text-muted mb-0">Here is your academic summary for today.</p>
+          </div>
+          <span class="text-muted small d-none d-md-block" id="currentDate"></span>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <a href="courses.html" class="text-decoration-none text-dark">
+              <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted small mb-1 fw-semibold">Courses</p>
+                      <h3 class="fw-bold mb-0">6</h3>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
+                      <i class="bi bi-journal-bookmark-fill fs-4"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="results.html" class="text-decoration-none text-dark">
+              <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted small mb-1 fw-semibold">Current GPA</p>
+                      <h3 class="fw-bold mb-0 text-success">3.62</h3>
+                    </div>
+                    <div class="bg-success bg-opacity-10 p-3 rounded-circle text-success">
+                      <i class="bi bi-graph-up-arrow fs-4"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="results.html" class="text-decoration-none text-dark">
+              <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted small mb-1 fw-semibold">Credits</p>
+                      <h3 class="fw-bold mb-0">84</h3>
+                    </div>
+                    <div class="bg-info bg-opacity-10 p-3 rounded-circle text-info">
+                      <i class="bi bi-award-fill fs-4"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-3">
+            <a href="#pendingTasksSection" class="text-decoration-none text-dark">
+              <div class="card stat-card border-0 shadow-sm h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-muted small mb-1 fw-semibold">Tasks</p>
+                      <h3 class="fw-bold mb-0 text-danger">3</h3>
+                    </div>
+                    <div class="bg-danger bg-opacity-10 p-3 rounded-circle text-danger">
+                      <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- GPA Chart -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white fw-bold py-3 d-flex justify-content-between align-items-center">
+            <span>Academic Performance (GPA)</span>
+            <span class="badge bg-light text-dark border">Last 5 Semesters</span>
+          </div>
+          <div class="card-body">
+            <canvas id="gpaChart" height="90"></canvas>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Announcements -->
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-header bg-white fw-bold py-3 d-flex justify-content-between align-items-center">
+                <span>Announcements</span>
+                <a href="#" class="text-decoration-none small">View All</a>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-action py-3 clickable-card" data-bs-toggle="modal" data-bs-target="#examModal">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 fw-bold text-primary">Final Exam Timetable</h6>
+                    <small class="text-muted">2 hrs ago</small>
+                  </div>
+                  <p class="mb-1 small text-muted">The final exam schedule for this semester has been published.</p>
+                </li>
+                <li class="list-group-item list-group-item-action py-3 clickable-card" data-bs-toggle="modal" data-bs-target="#feesModal">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 fw-bold text-warning">Fee Payment Deadline</h6>
+                    <small class="text-muted">Yesterday</small>
+                  </div>
+                  <p class="mb-1 small text-muted">Please settle your fees before 30 June to avoid late penalties.</p>
+                </li>
+                <li class="list-group-item list-group-item-action py-3 clickable-card" data-bs-toggle="modal" data-bs-target="#eventModal">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h6 class="mb-1 fw-bold text-success">Innovation Week 2026</h6>
+                    <small class="text-muted">3 days ago</small>
+                  </div>
+                  <p class="mb-1 small text-muted">Registration for tech exhibitions and coding competitions is now open.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Today's Schedule -->
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-header bg-white fw-bold py-3 d-flex justify-content-between align-items-center">
+                <span>Today's Classes</span>
+                <a href="courses.html" class="text-decoration-none small">Full Timetable</a>
+              </div>
+              <div class="card-body p-0">
+                <div class="list-group list-group-flush">
+                  <div class="list-group-item py-3 border-start border-4 border-primary">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h6 class="mb-1 fw-bold">IMS566 - Advanced Web Design</h6>
+                      <small class="text-primary fw-bold">10:00 AM</small>
+                    </div>
+                    <p class="mb-0 small text-muted">Dr. Ahmad Faiz • BK 4</p>
+                  </div>
+                  <div class="list-group-item py-3 border-start border-4 border-secondary opacity-50">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h6 class="mb-1 fw-bold">IMS552 - Database Systems</h6>
+                      <small class="text-secondary fw-bold">2:00 PM</small>
+                    </div>
+                    <p class="mb-0 small text-muted">Pn. Nurul Huda • Lab 2</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Tasks Detail Section -->
+        <div class="row mt-4" id="pendingTasksSection">
+          <div class="col-12">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-danger text-white fw-bold py-3">
+                🚨 Pending Tasks Action Required
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                  <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Course</th>
+                        <th>Task Description</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="badge bg-primary">IMS566</span></td>
+                        <td>Individual Project - Web App Prototype</td>
+                        <td>25 May 2026</td>
+                        <td><span class="badge bg-danger">Urgent</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge bg-primary">IMS552</span></td>
+                        <td>Lab Assignment 3 (SQL Queries)</td>
+                        <td>28 May 2026</td>
+                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td><span class="badge bg-primary">IMS590</span></td>
+                        <td>Software Requirement Specification (SRS)</td>
+                        <td>02 June 2026</td>
+                        <td><span class="badge bg-warning text-dark">Pending</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODALS (POPUPS) SECTION                    -->
+  <!-- ========================================== -->
+
+  <!-- 1. Quick Action: Student Email Modal -->
+  <div class="modal fade" id="emailModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">📧 Student Email</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <h4 class="mb-3">adib@student.uitm.edu.my</h4>
+          <p class="text-muted">Your official UiTM student email account. You have <strong>3 unread messages</strong>.</p>
+          <!-- Opens real UiTM Google Mail in a new tab -->
+          <a href="https://mail.google.com/a/student.uitm.edu.my" target="_blank" class="btn btn-primary mt-2">Open Webmail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Quick Action: Library Portal Modal -->
+  <div class="modal fade" id="libraryModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">📚 Library Portal</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="fw-bold">Currently Borrowed Books:</h6>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Web Design Principles
+              <span class="badge bg-danger rounded-pill">Due Tomorrow</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Database Systems Vol. 2
+              <span class="badge bg-success rounded-pill">Due in 5 days</span>
+            </li>
+          </ul>
+          <!-- Opens real UiTM Library website in a new tab -->
+          <a href="https://library.uitm.edu.my/" target="_blank" class="btn btn-success w-100">Search Library Catalog</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Quick Action: Pay Fees Modal -->
+  <div class="modal fade" id="payFeesModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title">💳 Pay Fees</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="text-muted mb-1">Total Outstanding Balance</p>
+          <h2 class="fw-bold text-danger mb-4">RM 1,250.00</h2>
+          <div class="d-grid gap-2">
+            <!-- Added onclick alert to simulate payment -->
+            <button class="btn btn-outline-primary" onclick="alert('Redirecting to FPX Payment Gateway... (Simulation)')">Pay via FPX (Online Banking)</button>
+            <button class="btn btn-outline-secondary" onclick="alert('Redirecting to Credit Card Payment Gateway... (Simulation)')">Pay via Credit/Debit Card</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Quick Action: Exam Slip Modal -->
+  <div class="modal fade" id="examSlipModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">📄 Exam Slip</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="alert alert-danger">
+            ⚠️ <strong>Barred!</strong><br>You cannot print your exam slip yet because you have outstanding fees.
+          </div>
+          <p class="small text-muted">Please clear your fees to generate your exam slip.</p>
+          <button class="btn btn-outline-danger mt-2" onclick="alert('Feature locked until fees are settled.')">Try to Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Announcement: Exam Modal -->
+  <div class="modal fade" id="examModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">Final Exam Timetable</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>The final examination timetable for Semester March 2026 - July 2026 has been released.</p>
+          <ul class="list-group small">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <strong>IMS566 (Advanced Web Design)</strong> <span>10 July, 9:00 AM</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <strong>IMS552 (Database)</strong> <span>12 July, 2:30 PM</span>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="window.print()">Download PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Announcement: Fees Modal -->
+  <div class="modal fade" id="feesModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-warning text-dark">
+          <h5 class="modal-title">Fee Payment Deadline</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Outstanding Balance: <strong>RM 1,250.00</strong></h6>
+          <p class="mb-2">Please settle your fees before <strong>30 June 2026</strong> to avoid late penalties or exam barring.</p>
+          <div class="alert alert-warning small mb-0">
+            Payment can be made via FPX or Credit Card through the Student Portal.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- This button closes the modal and opens the Pay Fees modal -->
+          <button type="button" class="btn btn-warning text-dark" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#payFeesModal">Pay Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Announcement: Event Modal -->
+  <div class="modal fade" id="eventModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">Innovation Week 2026</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Date:</strong> 15 - 18 August 2026</p>
+          <p><strong>Venue:</strong> UiTM Main Hall</p>
+          <p>Join us for a week of tech exhibitions, coding competitions, and guest talks from industry professionals. Open to all students!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" onclick="alert('Registration Successful! We will email you the details.')">Register Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer bg-dark text-white-50 mt-auto py-3 border-top border-secondary">
+    <div class="container d-flex flex-wrap justify-content-between small">
+      <span>© 2026 UiTM Student Portal · IMS566 Advanced Web Design</span>
+      <span>Developed by Adib</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // Set current date
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+
+    // GPA Chart Setup
+    const ctx = document.getElementById('gpaChart');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5'],
+        datasets: [{
+          label: 'GPA',
+          data: [3.42, 3.55, 3.48, 3.60, 3.62],
+          borderColor: '#4b1d6f',
+          backgroundColor: 'rgba(75, 29, 111, 0.1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          pointBackgroundColor: '#f2b705',
+          pointBorderColor: '#4b1d6f',
+          pointRadius: 5,
+          pointHoverRadius: 7
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { 
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#4b1d6f',
+            titleFont: { size: 14 },
+            bodyFont: { size: 14 }
+          }
+        },
+        scales: { 
+          y: { min: 3.0, max: 4.0, grid: { borderDash: [5, 5] } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

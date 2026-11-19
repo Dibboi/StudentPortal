@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examination Results | UiTM Student Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .grade-A { color: #198754; font-weight: bold; }
+    .grade-B { color: #0d6efd; font-weight: bold; }
+    .grade-C { color: #ffc107; font-weight: bold; }
+    .table-transcript th { background-color: #f8f9fa; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+    .summary-box { border-left: 4px solid #4b1d6f; background-color: #fff; }
+
+    /* --- PRINT SETTINGS --- */
+    @media print {
+      .navbar, .footer, .btn, .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: white !important;
+        color: black !important;
+      }
+      .card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-uitm sticky-top shadow-sm no-print">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="dashboard.html">
+        <span class="brand-badge">UiTM</span> Student Portal
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+          <li class="nav-item"><a class="nav-link active" href="results.html">Results</a></li>
+          <li class="nav-item">
+            <a class="nav-link text-warning fw-bold" href="#" id="logoutBtn">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    
+    <!-- HEADER SECTION -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+      <div>
+        <h2 class="fw-bold mb-1">Examination Results</h2>
+        <p class="text-muted mb-0">Official Academic Transcript</p>
+      </div>
+      <button class="btn btn-outline-secondary d-flex align-items-center gap-2 no-print" onclick="window.print()">
+        <i class="bi bi-printer"></i> Print / Save as PDF
+      </button>
+    </div>
+
+    <!-- ACADEMIC SUMMARY CARDS -->
+    <div class="row g-3 mb-5">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm summary-box h-100 p-3">
+          <p class="text-muted small mb-1 fw-bold text-uppercase">Cumulative GPA (CGPA)</p>
+          <h1 class="fw-bold text-success mb-0">3.62</h1>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm summary-box h-100 p-3">
+          <p class="text-muted small mb-1 fw-bold text-uppercase">Total Credits Earned</p>
+          <h1 class="fw-bold text-dark mb-0">84</h1>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm summary-box h-100 p-3" style="border-left-color: #f2b705;">
+          <p class="text-muted small mb-1 fw-bold text-uppercase">Academic Standing</p>
+          <h1 class="fw-bold text-primary mb-0">Dean's List</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT ROW -->
+    <div class="row g-4">
+      
+      <!-- LEFT SIDE: TRANSCRIPT TABLE -->
+      <div class="col-lg-8">
+        
+        <!-- Semester 5 (CURRENT SEMESTER) -->
+        <div class="card border-0 shadow-sm mb-4 border-top border-4 border-primary">
+          <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0">Semester 5 (March - July 2026) <span class="badge bg-primary ms-2 fs-6">Current</span></h5>
+            <span class="badge bg-success px-3 py-2 fs-6">GPA: 3.62</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-transcript">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Course Name</th>
+                  <th class="text-center">Credit</th>
+                  <th class="text-center">Grade</th>
+                  <th class="text-center">Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold">IMS566</td>
+                  <td>Advanced Web Design & CMS</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS552</td>
+                  <td>Database Management Systems</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A-</td>
+                  <td class="text-center">3.67</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS578</td>
+                  <td>Human-Computer Interaction</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS590</td>
+                  <td>Software Engineering</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B+</td>
+                  <td class="text-center">3.33</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS610</td>
+                  <td>Mobile Application Development</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS622</td>
+                  <td>Data Visualisation</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B</td>
+                  <td class="text-center">3.00</td>
+                </tr>
+              </tbody>
+              <tfoot class="table-light">
+                <tr>
+                  <td colspan="2" class="text-end fw-bold">Semester Total:</td>
+                  <td class="text-center fw-bold">18</td>
+                  <td colspan="2" class="text-center fw-bold">GPA: 3.62</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <!-- Semester 4 -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0 text-muted">Semester 4 (Oct 2025 - Feb 2026)</h5>
+            <span class="badge bg-secondary px-3 py-2">GPA: 3.60</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-transcript">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Course Name</th>
+                  <th class="text-center">Credit</th>
+                  <th class="text-center">Grade</th>
+                  <th class="text-center">Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold">IMS510</td>
+                  <td>System Analysis & Design</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A-</td>
+                  <td class="text-center">3.67</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS530</td>
+                  <td>Networking Fundamentals</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B+</td>
+                  <td class="text-center">3.33</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS540</td>
+                  <td>Object-Oriented Programming</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Semester 3 -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0 text-muted">Semester 3 (March - July 2025)</h5>
+            <span class="badge bg-secondary px-3 py-2">GPA: 3.48</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-transcript">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Course Name</th>
+                  <th class="text-center">Credit</th>
+                  <th class="text-center">Grade</th>
+                  <th class="text-center">Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold">IMS499</td>
+                  <td>Industrial Training</td>
+                  <td class="text-center">6</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS480</td>
+                  <td>Data Structures & Algorithms</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B</td>
+                  <td class="text-center">3.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS420</td>
+                  <td>Discrete Mathematics</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B+</td>
+                  <td class="text-center">3.33</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Semester 2 (NEW) -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0 text-muted">Semester 2 (Oct 2024 - Feb 2025)</h5>
+            <span class="badge bg-secondary px-3 py-2">GPA: 3.55</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-transcript">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Course Name</th>
+                  <th class="text-center">Credit</th>
+                  <th class="text-center">Grade</th>
+                  <th class="text-center">Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold">IMS310</td>
+                  <td>Computer Organization</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS320</td>
+                  <td>Web Programming</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A-</td>
+                  <td class="text-center">3.67</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS330</td>
+                  <td>Statistics for IT</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B+</td>
+                  <td class="text-center">3.33</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS340</td>
+                  <td>Multimedia Technology</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Semester 1 (NEW) -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0 text-muted">Semester 1 (March - July 2024)</h5>
+            <span class="badge bg-secondary px-3 py-2">GPA: 3.42</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-transcript">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Course Name</th>
+                  <th class="text-center">Credit</th>
+                  <th class="text-center">Grade</th>
+                  <th class="text-center">Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-bold">IMS110</td>
+                  <td>Introduction to Information Systems</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B+</td>
+                  <td class="text-center">3.33</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS120</td>
+                  <td>Programming Fundamentals</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A-</td>
+                  <td class="text-center">3.67</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS130</td>
+                  <td>Mathematics for Computing</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-B">B</td>
+                  <td class="text-center">3.00</td>
+                </tr>
+                <tr>
+                  <td class="fw-bold">IMS140</td>
+                  <td>Computer Ethics</td>
+                  <td class="text-center">3</td>
+                  <td class="text-center grade-A">A</td>
+                  <td class="text-center">4.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE: VISUALISATIONS -->
+      <div class="col-lg-4 no-print">
+        
+        <!-- Grade Distribution Doughnut -->
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-header bg-white fw-bold py-3">Overall Grade Distribution</div>
+          <div class="card-body">
+            <canvas id="gradeChart" height="200"></canvas>
+          </div>
+        </div>
+
+        <!-- Semester Performance Bar Chart -->
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white fw-bold py-3">Performance Trend (GPA)</div>
+          <div class="card-body">
+            <canvas id="trendChart" height="200"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer bg-dark text-white-50 mt-auto py-3 border-top border-secondary no-print">
+    <div class="container d-flex flex-wrap justify-content-between small">
+      <span>© 2026 UiTM Student Portal · IMS566 Advanced Web Design</span>
+      <span>Developed by Adib</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+  
+  <script>
+    // 1. Doughnut Chart (Updated data to match the new tables)
+    // A=10, A-=5, B+=4, B=3 (Total 22 courses)
+    new Chart(document.getElementById('gradeChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['A', 'A-', 'B+', 'B'],
+        datasets: [{
+          data: [10, 5, 4, 3], 
+          backgroundColor: ['#198754', '#4caf50', '#17a2b8', '#ffc107'],
+          borderWidth: 0
+        }]
+      },
+      options: { 
+        responsive: true, 
+        cutout: '70%',
+        plugins: { 
+          legend: { position: 'bottom' } 
+        } 
+      }
+    });
+
+    // 2. Bar Chart (Matches Dashboard chart exactly)
+    new Chart(document.getElementById('trendChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5'],
+        datasets: [{
+          label: 'GPA',
+          data: [3.42, 3.55, 3.48, 3.60, 3.62], 
+          backgroundColor: ['#4b1d6f', '#4b1d6f', '#4b1d6f', '#4b1d6f', '#f2b705'], // Sem 5 is Gold
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { min: 3.0, max: 4.0 }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
