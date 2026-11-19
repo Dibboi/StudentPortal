@@ -1,0 +1,72 @@
+/* ===== UiTM Student Portal - Custom Styles ===== */
+
+:root {
+  --uitm-purple: #4b1d6f;
+  --uitm-purple-dark: #35104f;
+  --uitm-gold: #f2b705;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: #f5f4f8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-uitm {
+  background-color: var(--uitm-purple) !important;
+}
+
+.brand-badge {
+  background: var(--uitm-gold);
+  color: var(--uitm-purple-dark);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.85em;
+}
+
+.btn-uitm {
+  background-color: var(--uitm-purple);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-uitm:hover {
+  background-color: var(--uitm-purple-dark);
+  color: #fff;
+}
+
+.auth-bg {
+  background: linear-gradient(135deg, var(--uitm-purple) 0%, #6a2a96 50%, var(--uitm-gold) 200%);
+  min-height: 100vh;
+}
+
+.uitm-logo {
+  width: 70px;
+  height: 70px;
+  background: var(--uitm-gold);
+  color: var(--uitm-purple-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.stat-card {
+  transition: transform 0.15s ease;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.footer {
+  margin-top: auto;
+}
+
+@media (max-width: 576px) {
+  .auth-bg .card-body { padding: 1.25rem !important; }
+  h2 { font-size: 1.4rem; }
+}
